@@ -92,7 +92,7 @@ const userMenuItems = computed(() => {
         <div class="header-bottom-wrapper d-flex align-items-center justify-content-between">
           <div class="header-logo">
             <router-link to="/">
-                <img src="@/assets/images/logodental.png" alt="Logo" style="width: 110px; height: 110px; border-radius: 50%;">
+                <img src="@/assets/images/escudo1.png" alt="Logo" style="width: 110px; height: 110px; border-radius: 50%;">
             </router-link>
           </div>
 
@@ -106,7 +106,7 @@ const userMenuItems = computed(() => {
               </li>
               <li v-if="authStore.token && authStore.role === 'odontologo'">
                 <router-link to="/citas">Ver Citas</router-link>
-              </li> 
+              </li>
               <li v-if="authStore.token && authStore.role === 'odontologo'">
                 <router-link to="/odontologos">Odontólogos</router-link>
               </li>
