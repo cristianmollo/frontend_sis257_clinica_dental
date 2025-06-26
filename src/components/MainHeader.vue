@@ -79,7 +79,7 @@ const userMenuItems = computed(() => {
           </div>
 
           <div class="header-social">
-              <img src="@/assets/images/escudo1.png" alt="Logo" style="width: 80px;height: 80px;">
+              <img src="@/assets/images/logo.png" alt="Logo" style="width: 80px;height: 80px;">
             <img src="" alt="">
           </div>
         </div>
