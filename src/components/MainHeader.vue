@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import Button from 'primevue/button';
-import { useAuthStore } from '@/stores'; // Aseguramos la ruta correcta
-import { ref, computed } from 'vue';
-import router from '@/router';
-import Menu from 'primevue/menu';
-import Dialog from 'primevue/dialog';
+import Button from 'primevue/button'
+import { useAuthStore } from '@/stores' // Aseguramos la ruta correcta
+import { ref, computed } from 'vue'
+import router from '@/router'
+import Menu from 'primevue/menu'
+import Dialog from 'primevue/dialog'
 
-const authStore = useAuthStore();
-const showLogoutMessage = ref(false); // Controla la visibilidad del mensaje flotante
-const userMenu = ref<InstanceType<typeof Menu> | null>(null);
-const showConfirmLogout = ref(false); // Estado para mostrar el diálogo de confirmación
+const authStore = useAuthStore()
+const showLogoutMessage = ref(false) // Controla la visibilidad del mensaje flotante
+const userMenu = ref<InstanceType<typeof Menu> | null>(null)
+const showConfirmLogout = ref(false) // Estado para mostrar el diálogo de confirmación
 
 async function handleLogout() {
-  showConfirmLogout.value = false; // Oculta el diálogo
-  showLogoutMessage.value = true; // Muestra el mensaje flotante
+  showConfirmLogout.value = false // Oculta el diálogo
+  showLogoutMessage.value = true // Muestra el mensaje flotante
   setTimeout(() => {
-    authStore.logout(); // Llama al método de cierre de sesión
-    showLogoutMessage.value = false; // Oculta el mensaje flotante
-    router.push('/'); // Redirige al inicio
-  }, 1000); // Espera 1 segundo antes de redirigir
+    authStore.logout() // Llama al método de cierre de sesión
+    showLogoutMessage.value = false // Oculta el mensaje flotante
+    router.push('/') // Redirige al inicio
+  }, 1000) // Espera 1 segundo antes de redirigir
 }
 
 // Opciones dinámicas del menú del usuario según el rol
@@ -35,7 +35,7 @@ const userMenuItems = computed(() => {
         icon: 'pi pi-sign-out',
         command: () => (showConfirmLogout.value = true),
       },
-    ];
+    ]
   } else if (authStore.role === 'odontologo') {
     return [
       {
@@ -48,10 +48,10 @@ const userMenuItems = computed(() => {
         icon: 'pi pi-sign-out',
         command: () => (showConfirmLogout.value = true),
       },
-    ];
+    ]
   }
-  return []; // Menú vacío para otros roles o usuarios no autenticados
-});
+  return [] // Menú vacío para otros roles o usuarios no autenticados
+})
 </script>
 
 <template>
@@ -79,8 +79,12 @@ const userMenuItems = computed(() => {
           </div>
 
           <div class="header-social">
-              <img src="@/assets/images/escudo1.png" alt="Logo" style="width: 80px;height: 80px;">
-            <img src="" alt="">
+            <img
+              src="@/assets/images/escudo1.png"
+              alt="Logo"
+              style="width: 80px; height: 80px"
+            />
+            <img src="" alt="" />
           </div>
         </div>
       </div>
@@ -89,10 +93,16 @@ const userMenuItems = computed(() => {
     <!-- Header Bottom Start -->
     <div class="header-bottom">
       <div class="container">
-        <div class="header-bottom-wrapper d-flex align-items-center justify-content-between">
+        <div
+          class="header-bottom-wrapper d-flex align-items-center justify-content-between"
+        >
           <div class="header-logo">
             <router-link to="/">
-                <img src="@/assets/images/logo.png" alt="Logo" style="width: 150px; height: 110px; border-radius: 50%;">
+              <img
+                src="@/assets/images/logo.png"
+                alt="Logo"
+                style="width: 160px; height: 110px"
+              />
             </router-link>
           </div>
 
@@ -119,17 +129,14 @@ const userMenuItems = computed(() => {
             </ul>
 
             <div class="d-flex align-items-center ms-4">
-              <p
-                v-if="authStore.token"
-                class="welcome-text"
-              >
+              <p v-if="authStore.token" class="welcome-text">
                 Bienvenido, {{ authStore.user?.name || 'Usuario' }}!
               </p>
 
               <div v-if="authStore.token" class="user-menu ms-3">
                 <Button
                   icon="pi pi-user"
-                  style="font-size: 2rem; color:#2e7d32;"
+                  style="font-size: 2rem; color: #2e7d32"
                   class="p-button-rounded p-button-text custom-button"
                   aria-label="User Menu"
                   @click="userMenu?.toggle($event)"
@@ -144,8 +151,18 @@ const userMenuItems = computed(() => {
                 >
                   <p>¿Está seguro de que desea cerrar sesión?</p>
                   <div class="d-flex justify-content-end mt-4">
-                    <Button label="Cancelar" icon="pi pi-times" class="p-button-text" @click="showConfirmLogout = false" />
-                    <Button label="Salir" icon="pi pi-check" class="p-button-danger" @click="handleLogout" />
+                    <Button
+                      label="Cancelar"
+                      icon="pi pi-times"
+                      class="p-button-text"
+                      @click="showConfirmLogout = false"
+                    />
+                    <Button
+                      label="Salir"
+                      icon="pi pi-check"
+                      class="p-button-danger"
+                      @click="handleLogout"
+                    />
                   </div>
                 </Dialog>
               </div>
@@ -161,7 +178,11 @@ const userMenuItems = computed(() => {
           </div>
 
           <div class="header-toggle d-lg-none">
-            <button class="menu-toggle" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
+            <button
+              class="menu-toggle"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasMenu"
+            >
               <span></span><span></span><span></span>
             </button>
           </div>
@@ -173,8 +194,15 @@ const userMenuItems = computed(() => {
   <!-- Mobile Menu -->
   <div class="offcanvas offcanvas-start" id="offcanvasMenu">
     <div class="offcanvas-header">
-      <a class="logo" href="#"><img src="@/assets/images/logo.png" alt="Logo" /></a>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <a class="logo" href="#"
+        ><img src="@/assets/images/logo.png" alt="Logo"
+      /></a>
+      <button
+        type="button"
+        class="btn-close text-reset"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+      ></button>
     </div>
 
     <div class="offcanvas-body">
@@ -187,21 +215,39 @@ const userMenuItems = computed(() => {
       </div>
       <div class="header-social">
         <ul class="social">
-          <li><a href="#"><i class="ri-facebook-fill"></i></a></li>
-          <li><a href="#"><i class="ri-twitter-fill"></i></a></li>
-          <li><a href="#"><i class="ri-linkedin-fill"></i></a></li>
-          <li><a href="#"><i class="ri-instagram-fill"></i></a></li>
+          <li>
+            <a href="#"><i class="ri-facebook-fill"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="ri-twitter-fill"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="ri-linkedin-fill"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="ri-instagram-fill"></i></a>
+          </li>
         </ul>
       </div>
 
       <div class="mobile-menu">
         <ul class="nav-menu">
           <li><router-link to="/" class="active">Inicio</router-link></li>
-          <li v-if="authStore.token && authStore.role === 'cliente'"><router-link to="/citas">Mis Citas</router-link></li>
-          <li v-if="authStore.token && authStore.role === 'odontologo'"><router-link to="/citas">Ver Citas</router-link></li>
-          <li v-if="authStore.token && authStore.role === 'odontologo'"><router-link to="/odontologo_servicios">Servicios</router-link></li>
-          <li v-if="authStore.token && authStore.role === 'odontologo'"><router-link to="/odontologos">Odontólogos</router-link></li>
-          <li v-if="authStore.token && authStore.role === 'odontologo'"><router-link to="/clientes">Clientes</router-link></li>
+          <li v-if="authStore.token && authStore.role === 'cliente'">
+            <router-link to="/citas">Mis Citas</router-link>
+          </li>
+          <li v-if="authStore.token && authStore.role === 'odontologo'">
+            <router-link to="/citas">Ver Citas</router-link>
+          </li>
+          <li v-if="authStore.token && authStore.role === 'odontologo'">
+            <router-link to="/odontologo_servicios">Servicios</router-link>
+          </li>
+          <li v-if="authStore.token && authStore.role === 'odontologo'">
+            <router-link to="/odontologos">Odontólogos</router-link>
+          </li>
+          <li v-if="authStore.token && authStore.role === 'odontologo'">
+            <router-link to="/clientes">Clientes</router-link>
+          </li>
         </ul>
       </div>
     </div>
@@ -227,7 +273,9 @@ const userMenuItems = computed(() => {
 .header-social i {
   color: #fff;
   font-size: 1.2rem;
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
 }
 .header-social a:hover i {
   transform: scale(1.2);
@@ -237,7 +285,9 @@ const userMenuItems = computed(() => {
   color: white;
   font-weight: 500;
   padding: 0.5rem 1rem;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
 }
 .nav-menu li a:hover,
 .nav-menu li a.active {
