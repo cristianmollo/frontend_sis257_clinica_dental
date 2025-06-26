@@ -79,7 +79,7 @@ const userMenuItems = computed(() => {
           </div>
 
           <div class="header-social">
-              <img src="@/assets/images/logo.png" alt="Logo" style="width: 80px;height: 80px;">
+              <img src="@/assets/images/escudo1.png" alt="Logo" style="width: 80px;height: 80px;">
             <img src="" alt="">
           </div>
         </div>
@@ -92,7 +92,7 @@ const userMenuItems = computed(() => {
         <div class="header-bottom-wrapper d-flex align-items-center justify-content-between">
           <div class="header-logo">
             <router-link to="/">
-                <img src="@/assets/images/escudo1.png" alt="Logo" style="width: 110px; height: 110px; border-radius: 50%;">
+                <img src="@/assets/images/logo.png" alt="Logo" style="width: 150px; height: 110px; border-radius: 50%;">
             </router-link>
           </div>
 
